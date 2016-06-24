@@ -56,7 +56,7 @@ public class MegaJumper extends ApplicationAdapter {
 
         jumper.setPosition(width / 2 - jumper.getBounds().getWidth() / 2, height / 2);
         jumper.setVelocity(0, 0);
-        platform.setPosition(width / 2 - platform.getBounds().getHeight() / 2, width / 2 - 500);
+        platform.setPosition(width / 2 - platform.getBounds().getWidth() / 2, height / 2 - 500);
         platform2.setPosition(width / 2 - platform.getBounds().getWidth() / 2, height / 2 - 100);
 
     }
@@ -71,7 +71,7 @@ public class MegaJumper extends ApplicationAdapter {
 
         //updates bounds because you need your bounds to follow the visuals
         jumper.setBounds(jumper.getPosition().x, jumper.getPosition().y);
-        platform.setBounds(width / 2 - platform.getBounds().getWidth() / 2, height / 2 -500);
+        platform.setBounds(width / 2 - platform.getBounds().getWidth() / 2, height / 2 - 500);
         platform2.setBounds(width / 2 - platform.getBounds().getWidth() / 2, height / 2 - 100);
 
 
