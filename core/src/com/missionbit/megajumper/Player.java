@@ -8,9 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.sun.org.apache.regexp.internal.RE;
 
-/**
- * Created by Ryan on 6/21/2016.
- */
+
 public class Player {
     private float width, height, accel; //width and height of screen
     private Rectangle bounds;           //hitbox of player
@@ -22,11 +20,12 @@ public class Player {
     public Player() {
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getWidth();
-        img = new Texture("missionbit.png");
+        img = new Texture("Blue.png");
         sprite = new Sprite(img);
         velocity = new Vector2();
         position = new Vector2();
         bounds = new Rectangle();
+        sprite.setSize(230, 230);
     }
 
     public void setAccel(float x, float multiplier) {accel = Gdx.input.getAccelerometerX() * multiplier;}
@@ -55,5 +54,5 @@ public class Player {
         return velocity;
     }
 
-    public void draw(SpriteBatch batch) {batch.draw(sprite, getPosition().x, getPosition().y);}
+    public void draw(SpriteBatch batch) {batch.draw(sprite, getPosition().x, getPosition().y,sprite.getWidth(),sprite.getHeight());}
 }
