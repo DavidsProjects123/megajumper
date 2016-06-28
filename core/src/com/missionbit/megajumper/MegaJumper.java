@@ -2,6 +2,7 @@ package com.missionbit.megajumper;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ public class MegaJumper extends ApplicationAdapter {
     private BitmapFont font;
     private enum GameState {START, IN_GAME, GAME_OVER}
     private static GameState state;
+    Music music;
 
     @Override
     public void create () {
@@ -40,13 +42,15 @@ public class MegaJumper extends ApplicationAdapter {
         platforms = new ArrayList<Platform>();
         batch = new SpriteBatch();
         gravity = new Vector2();
-        font = new BitmapFont(Gdx.files.internal("arial.fnt"),
 
-        //music = Gdx.audio.newMusic(Gdx.files.internal"");
-        //music.setLooping(true);
-        //music.play()
+        music = Gdx.audio.newMusic(Gdx.files.internal("Forest.mp3"));
+        music.setVolume(100);
+        music.setLooping(true);
+
+
         //        bounce = Gdx.audio.newSound(Gdx.files.internal("");
 
+        font = new BitmapFont(Gdx.files.internal("arial.fnt"),
                 Gdx.files.internal("arial.png"), false);
         resetGame();
     }
@@ -78,6 +82,7 @@ public class MegaJumper extends ApplicationAdapter {
     private void updateGame() {
         //game logic stuff here
         float deltaTime = Gdx.graphics.getDeltaTime();
+        music.play();
 
         //controls left-right movement, multiplier controls how responsive controls feel
         jumper.setAccel(Gdx.input.getAccelerometerX(), -250);
@@ -107,6 +112,13 @@ public class MegaJumper extends ApplicationAdapter {
             //update jumper velocity and update position
             jumper.getVelocity().x += jumper.getAccel();
             jumper.getPosition().mulAdd(jumper.getVelocity(), deltaTime);
+            if (jumper.getPosition(). x  > width) {
+                jumper.setPosition(0, jumper.getPosition().y);
+            }
+            if (jumper.getPosition().x < 0) {
+                jumper.setPosition(width, jumper.getPosition().y);
+            }
+
 
             //platform logic
             float lowestPlatform = platforms.get(0).getPosition().y;
@@ -140,6 +152,7 @@ public class MegaJumper extends ApplicationAdapter {
             }
         }
     }
+
 
     private void drawGame() {
         //game world camera
